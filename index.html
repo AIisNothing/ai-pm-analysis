@@ -511,7 +511,7 @@ var Fr={},Gr={};var Wr,Hr=function(){function t(t,e,n){var i=this;this._sleepAft
 
   <div class="card">
     <div class="card-title">各产品方向薪资对比</div>
-    <div class="metric-note">n = <span data-bind="cross_dir.total_n" data-fmt="num">4,266</span>（已剔除 AI 定向采集源）· 按高薪率降序排序 · 大盘基准 = <span data-bind="cross_dir.weighted_hr" data-fmt="pct">29.2%</span></div>
+    <div class="metric-note">n = <span data-bind="cross_dir.total_n" data-fmt="num">4,266</span>（已剔除会导致 AI 方向被过度放大的定向采集样本）· 按高薪率降序排序 · 大盘基准 = <span data-bind="cross_dir.weighted_hr" data-fmt="pct">29.2%</span></div>
 
     <div style="overflow-x:auto;">
     <table style="width:100%;border-collapse:collapse;font-size:0.92rem;margin-top:12px;">
@@ -551,7 +551,7 @@ var Fr={},Gr={};var Wr,Hr=function(){function t(t,e,n){var i=this;this._sleepAft
     <div style="padding:12px 16px; line-height:1.8; opacity:0.75;">
       · 本对比是<strong>描述性横截面观察</strong>，不构成因果推断。各方向人群结构（经验、学历、规模、细分方向）可能不同，AI 方向可能集中了更多大厂高级岗位。<br>
       · 本结论说明的是 AI 方向 JD 池整体薪资分布更高，<strong>不等同于"同一个人转 AI 一定涨薪"</strong>——个人能否拿到高薪仍取决于背景匹配度。<br>
-      · 口径：n=<span data-bind="cross_dir.total_n" data-fmt="num">4,266</span> 无偏跨方向样本（剔除 AI 定向重复采集源），后续 AI 内部分析章节回到主样本 <span data-bind="sample.main_n">700</span> 条。
+      · 口径：n=<span data-bind="cross_dir.total_n" data-fmt="num">4,266</span> 无偏跨方向样本（已剔除会导致 AI 方向被过度放大的定向采集样本），后续 AI 内部分析章节回到主样本 <span data-bind="sample.main_n">700</span> 条。
     </div>
   </details>
 </div>
@@ -3097,8 +3097,8 @@ window.REPORT_DATA = {
       "ai_n": 435,
       "ai_pct": 10.2,
       "excluded_sources": [
-        "ai_targeted_source_1",
-        "ai_targeted_source_2"
+        "excluded_1",
+        "excluded_2"
       ]
     },
     "cross_with_jd": {
