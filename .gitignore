@@ -1,0 +1,21 @@
+# Data
+*.db
+*.csv
+*.json
+!package.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Backup
+*.bak
