@@ -52,7 +52,7 @@ JD 是非结构化文本，无法直接做统计分析。我们用**正则规则
 "RAG/检索增强":  [r"rag", r"检索增强", r"retrieval", r"知识库", r"向量"]
 "Prompt工程":    [r"prompt", r"提示词", r"指令工程"]
 "多模态":        [r"多模态", r"multi.?modal", r"视觉.*语言"]
-# ... 共 16 类，详见 analysis/ai_deep_analysis.py
+# ... 共 16 类，详见 analysis/analysis_method_example.py
 ```
 
 **产品能力信号**（12 类）：数据分析/SQL、项目管理/跨团队、场景抽象/系统设计、PRD/需求文档、用户研究、商业化/变现 ...
@@ -179,7 +179,7 @@ PRD/需求文档在高薪 JD 中出现率（28%）低于普通 JD（43%）。早
 ├── report/
 │   └── AI产品经理_深度分析.html     # 自包含交互式报告（脱敏版，内嵌 ECharts）
 ├── analysis/
-│   └── ai_deep_analysis.py         # 分析方法示例（信号提取 + 瀑布聚类 + 高薪差异）
+│   └── analysis_method_example.py         # 分析方法示例（信号提取 + 瀑布聚类 + 高薪差异）
 ├── methodology/
 │   ├── analysis_principles.md       # 分析原则与方法论
 │   └── audit_rules.md              # 报告审计规范
@@ -187,7 +187,7 @@ PRD/需求文档在高薪 JD 中出现率（28%）低于普通 JD（43%）。早
 └── README.md
 ```
 
-分析脚本（`ai_deep_analysis.py`）展示了信号提取的正则规则、聚类的瀑布逻辑、高薪差异的计算方式。如果你有自己合法合规的数据源，可以复用这套分析框架。
+分析脚本（`analysis_method_example.py`）展示了信号提取的正则规则、聚类的瀑布逻辑、高薪差异的计算方式。如果你有自己合法合规的数据源，可以复用这套分析框架。
 
 ---
 

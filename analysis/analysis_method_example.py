@@ -15,7 +15,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from typing import Optional
 
-DB_PATH = os.environ.get("JD_DB_PATH", os.path.join(os.path.dirname(__file__), "..", "data", "pm_analysis.db"))
+DB_PATH = os.environ.get("JD_DB_PATH", "sample_jobs.db")
 
 # ============================================================
 # 1. 薪资解析
@@ -142,8 +142,14 @@ def extract_signals(text: str, signal_dict: dict) -> dict:
 
 
 def extract_all_features(row) -> dict:
-    """从一条记录中提取所有结构化特征"""
-    jd = row["jd_description"] or ""
+    """从一条记录中提取所有结构化特征
+
+    期望的数据表字段：
+      id, title, company, salary_desc, experience, education,
+      area, company_industry, company_scale, company_stage,
+      jd_text, skills_json, direction
+    """
+    jd = row["jd_text"] or ""
     title = row["title"] or ""
     skills_raw = row["skills_json"] or "[]"
     try:
@@ -168,10 +174,10 @@ def extract_all_features(row) -> dict:
         "salary_months": sal["months"] if sal else None,
         "experience": row["experience"],
         "education": row["education"],
-        "area_district": row["area_district"],
-        "company_industry": row.get("company_industry") or row.get("brand_industry"),
-        "company_scale": row.get("company_scale") or row.get("brand_scale_name"),
-        "company_stage": row.get("company_stage") or row.get("brand_stage_name"),
+        "area": row.get("area", ""),
+        "company_industry": row.get("company_industry", ""),
+        "company_scale": row.get("company_scale", ""),
+        "company_stage": row.get("company_stage", ""),
         "jd_length": len(jd),
         "skills": skills,
     }
