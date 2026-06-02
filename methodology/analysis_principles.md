@@ -27,7 +27,7 @@
 ### 方向重新聚类
 - 不依赖平台原始分类
 - 基于 title + skills + description 关键词匹配
-- 17 个方向，优先级从上到下（见 generate_deep_report.py 中的 DIRECTION_RULES）
+- 多个方向，优先级从上到下（见 `analysis/ai_deep_analysis.py` 中的聚类规则）
 
 ---
 

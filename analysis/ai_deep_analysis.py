@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
-AI/大模型产品岗位深度分析脚本
-从 1,301 条 AI 方向 JD 中提取结构化特征，做自然聚类和高薪差异分析
+AI/大模型产品岗位深度分析脚本（方法示例）
+从 JD 样本中提取结构化特征，做自然聚类和高薪差异分析。
+
+注意：本脚本不包含原始数据。如需运行，请使用合法合规且已脱敏的招聘数据，
+并将数据库路径配置为环境变量 JD_DB_PATH 或修改下方 DB_PATH。
 """
 
 import sqlite3
@@ -12,7 +15,7 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from typing import Optional
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "data", "boss_deep_jd.db")
+DB_PATH = os.environ.get("JD_DB_PATH", os.path.join(os.path.dirname(__file__), "..", "data", "pm_analysis.db"))
 
 # ============================================================
 # 1. 薪资解析
@@ -166,9 +169,9 @@ def extract_all_features(row) -> dict:
         "experience": row["experience"],
         "education": row["education"],
         "area_district": row["area_district"],
-        "brand_industry": row["brand_industry"],
-        "brand_scale_name": row["brand_scale_name"],
-        "brand_stage_name": row["brand_stage_name"],
+        "company_industry": row.get("company_industry") or row.get("brand_industry"),
+        "company_scale": row.get("company_scale") or row.get("brand_scale_name"),
+        "company_stage": row.get("company_stage") or row.get("brand_stage_name"),
         "jd_length": len(jd),
         "skills": skills,
     }
@@ -192,8 +195,8 @@ def load_data():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     rows = conn.execute("""
-        SELECT * FROM deep_jd_records
-        WHERE detail_status='success' AND direction='AI/大模型产品'
+        SELECT * FROM jd_records
+        WHERE direction='AI/大模型产品'
     """).fetchall()
     conn.close()
     return rows

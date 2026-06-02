@@ -1,8 +1,17 @@
-# Data
+# Data (prevent accidental commits)
+data/
+raw_data/
+private_data/
 *.db
+*.sqlite
 *.csv
-*.json
-!package.json
+*.xlsx
+*.jsonl
+*.parquet
+
+# Environment
+.env
+.env.*
 
 # OS
 .DS_Store
@@ -12,10 +21,16 @@ Thumbs.db
 __pycache__/
 *.pyc
 .venv/
+venv/
 
 # IDE
 .vscode/
 .idea/
+
+# Temp & cache
+cache/
+tmp/
+outputs/
 
 # Backup
 *.bak

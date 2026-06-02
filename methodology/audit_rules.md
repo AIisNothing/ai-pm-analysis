@@ -81,14 +81,14 @@
 - 数据表格一致
 - 结论文字一致
 
-每次修改必须同时更新 `generate_html()` 和 `generate_markdown()`。
+每次修改报告内容后，需确保 HTML 和其他格式版本的信息一致。
 
 ---
 
 ## 8. 脱敏版额外检查
 
 公开版（脱敏版）必须确认：
-- 无具体平台名（Boss直聘等）
+- 无具体招聘平台名
 - 无真实公司榜单
 - 无单条岗位精确薪资
 - 无"岗位+公司+薪资+来源"组合
@@ -98,26 +98,6 @@
 
 ---
 
-## 审计脚本模板
+## 审计脚本思路
 
-```python
-import re
-from models.database import init_db, get_engine
-from models.tables import JobRecordDB
-from sqlalchemy.orm import Session
-from sqlalchemy import func
-import numpy as np
-
-# 独立复算
-init_db()
-engine = get_engine()
-with Session(engine) as s:
-    total = s.query(JobRecordDB).count()
-    # 有效样本（salary_mid < 100K）
-    valid = s.query(JobRecordDB).filter(
-        JobRecordDB.salary_min.isnot(None),
-        (JobRecordDB.salary_min + JobRecordDB.salary_max) / 2 < 100
-    ).count()
-    print(f"总记录: {total}, 有效样本: {valid}")
-    # ... 继续复算各指标
-```
+使用独立的 SQL 查询复算报告中的关键指标（总样本量、各方向中位数、高薪率等），与报告展示的数字逐一比对。详见 `analysis/ai_deep_analysis.py` 中的统计函数。
